@@ -49,7 +49,7 @@ function(mtrt_get_tensorrt_cuda_version trt_version out_var)
 
   set(selected_cuda_version "")
   if(ctk_version)
-    foreach(available_version IN_LISTS trt_available_cuda_versions)
+    foreach(available_version IN LISTS trt_available_cuda_versions)
       if(ctk_version VERSION_LESS_EQUAL available_version)
         set(selected_cuda_version "${available_version}")
       endif()
