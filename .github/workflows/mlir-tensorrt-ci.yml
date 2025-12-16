@@ -66,7 +66,7 @@ jobs:
         run: |
            set -euo pipefail
            set -x
-           bash ./.github/workflows/mlir-tensorrt/ci-utils.sh format-check
+           bash ./.github/workflows/mlir-tensorrt/ci-utils.sh lint-check
       - name: Run release checks
       # release check is only needed for release tags
         if: ${{ github.ref_type == 'tag' }}
