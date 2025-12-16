@@ -49,6 +49,7 @@ jobs:
   pre-check:
     name: Pre Check
     if: ${{ needs.changes.outputs.has_changes == 'true' }}
+    needs: changes
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/nvidia/tensorrt-incubator/mlir-tensorrt:cuda12.9-ubuntu24.04-0.1
