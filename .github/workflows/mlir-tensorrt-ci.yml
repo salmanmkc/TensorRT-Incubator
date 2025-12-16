@@ -40,7 +40,7 @@ jobs:
         run: |
           set -euo pipefail
           set -x
-          python3 ./.github/workflows/mlir-tensorrt/ci-utils.sh detect-code-change
+          bash ./.github/workflows/mlir-tensorrt/ci-utils.sh detect-code-change
 
   pre-check:
     name: Pre Check
@@ -61,14 +61,14 @@ jobs:
         run: |
            set -euo pipefail
            set -x
-           python3 ./.github/workflows/mlir-tensorrt/ci-utils.sh format-check
+           bash ./.github/workflows/mlir-tensorrt/ci-utils.sh format-check
       - name: Run release checks
       # release check is only needed for release tags
         if: ${{ github.ref_type == 'tag' }}
         run: |
           set -euo pipefail
           set -x
-          python3 ./.github/workflows/mlir-tensorrt/ci-utils.sh release-check
+          bash ./.github/workflows/mlir-tensorrt/ci-utils.sh release-check
       - name: Generate Build Matrix
         id: generate-matrix
         run: |

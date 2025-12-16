@@ -85,7 +85,7 @@ cmd_lint_check() {
 
 cmd_release_check() {
     local ref_type="${GITHUB_REF_TYPE:-}"
-    VERSION_FILE="mlir-tensorrt/version.cmake"
+    VERSION_FILE="mlir-tensorrt/Version.cmake"
     if [ ! -f "${VERSION_FILE}" ]; then
         echo "Error: ${VERSION_FILE} not found"
         exit 1
@@ -106,10 +106,10 @@ cmd_release_check() {
             echo "Tag ${tag} matches expected tag ${expected_tag} from ${VERSION_FILE}"
             ;;
         *)
-        # tag mismatch
-        echo "Error: Tag ${tag} does not match expected tag ${expected_tag} from ${VERSION_FILE}"
-        exit 1
-        ;;
+            # tag mismatch
+            echo "Error: Tag ${tag} does not match expected tag ${expected_tag} from ${VERSION_FILE}"
+            exit 1
+            ;;
     esac
 }
 
@@ -126,7 +126,7 @@ main() {
       cmd_release_check
       ;;
     *)
-      echo "Usage: $0 {detect-code-change|lint-check}"
+      echo "Usage: $0 {detect-code-change|lint-check|release-check}"
       exit 2
       ;;
   esac
