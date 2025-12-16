@@ -40,7 +40,11 @@ jobs:
         run: |
           set -euo pipefail
           set -x
-          bash ./.github/workflows/mlir-tensorrt/ci-utils.sh detect-code-change
+          if bash ./.github/workflows/mlir-tensorrt/ci-utils.sh detect-code-change; then
+            echo "has_changes=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "has_changes=false" >> "${GITHUB_OUTPUT}"
+          fi
 
   pre-check:
     name: Pre Check

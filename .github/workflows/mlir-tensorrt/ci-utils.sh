@@ -41,8 +41,7 @@ cmd_detect_code_change() {
   local ref_type="${GITHUB_REF_TYPE:-}"
   if [ "${event_name}" = "schedule" ] || [ "${event_name}" = "workflow_dispatch" ] || [ "${ref_type:-}" = "tag" ]; then
     echo "github.event_name: ${event_name} or github.ref_type: ${ref_type}"
-    echo "has_changes=true" >> "${GITHUB_OUTPUT}"
-    exit 0
+    return 0
   fi
 
   local range
@@ -50,17 +49,17 @@ cmd_detect_code_change() {
 
   set +e
   local diff_output
-  diff_output="$(git diff --name-only ${range})"
+  diff_output="$(git diff --name-only "${range}")"
   local diff_status=$?
   set -e
   if [ ${diff_status} -ne 0 ]; then
     echo "git diff failed for RANGE='${range}'" >&2
-    echo "has_changes=true" >> "${GITHUB_OUTPUT}"
+    return 0
   else
     if echo "${diff_output}" | grep -Eq '^(mlir-tensorrt/|\.github/workflows/mlir-tensorrt[^/]*\.yml|\.github/workflows/mlir-tensorrt/)'; then
-      echo "has_changes=true" >> "${GITHUB_OUTPUT}"
+      return 0
     else
-      echo "has_changes=false" >> "${GITHUB_OUTPUT}"
+      return 1
     fi
   fi
 }
