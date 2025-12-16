@@ -95,9 +95,9 @@ cmd_release_check() {
     fi
     local tag="${GITHUB_REF_NAME:-}"
 
-    major=$(awk -F'"' '/MLIR_TENSORRT_VERSION_MAJOR/ {print $2}' "${VERSION_FILE}")
-    minor=$(awk -F'"' '/MLIR_TENSORRT_VERSION_MINOR/ {print $2}' "${VERSION_FILE}")
-    patch=$(awk -F'"' '/MLIR_TENSORRT_VERSION_PATCH/ {print $2}' "${VERSION_FILE}")
+    major=$(awk -F'"' '/MLIR_TENSORRT_VERSION_MAJOR / {print $2}' "${VERSION_FILE}")
+    minor=$(awk -F'"' '/MLIR_TENSORRT_VERSION_MINOR / {print $2}' "${VERSION_FILE}")
+    patch=$(awk -F'"' '/MLIR_TENSORRT_VERSION_PATCH / {print $2}' "${VERSION_FILE}")
     expected_tag="v${major}.${minor}.${patch}"
 
     case "${tag}" in
